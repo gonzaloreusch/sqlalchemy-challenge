@@ -37,7 +37,7 @@ def home_page():
         f"   (Note: Enter date range format: start date/end date (i.e. YYYY-MM-DD/YYYY-MM-DD))<br/>"
     )
 
-@app.route("/api/v1.0/precipitation")
+@app.route("Precipitation/api/v1.0/precipitation")
 def precipitation():
     # Create our session (link) from Python to the DB
     session = Session(engine)
@@ -53,7 +53,7 @@ def precipitation():
         precipita.append(r)
     return jsonify(precipita)
 
-@app.route("/api/v1.0/stations")
+@app.route("Stations/api/v1.0/stations")
 def stations():
     # Create our session (link) from Python to the DB
     session = Session(engine)
@@ -76,7 +76,7 @@ def tobs():
     session.close()
     return jsonify(statobs12mo_list) 
 
-@app.route("/api/v1.0/<start>")
+@app.route("/api/v1.0/start/<start>")
 def start_temp(start):
     session = Session(engine)
     calc_results = session.query(func.min(Measurement.tobs),\
