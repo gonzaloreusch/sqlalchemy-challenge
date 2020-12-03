@@ -25,16 +25,15 @@ app=Flask(__name__)
 #Flask routes
 @app.route("/")
 def home_page():
-    
     return(
-        f"Travel climate research<br/><br/>"
-        f"Available Routes:<br/><br/>"
-        f"Precipitation/api/v1.0/precipitation<br/>"
-        f"Stations/api/v1.0/stations<br/>"
-        f"/api/v1.0/tobs<br/><br/>"
-        f"/api/v1.0/start/<start>"
-        f" (Note: Enter start date after'/' in YYYY-MM-DD format.) <br/> <br/>"  #Thanks Gary!!
-        f"/api/v1.0/date_range/<start>/<end> "
+        f"Travel climate research<br/><br/>"+
+        f"Available Routes:<br/><br/>"+
+        f"Precipitation/api/v1.0/precipitation<br/>"+
+        f"Stations/api/v1.0/stations<br/>"+
+        f"/api/v1.0/tobs<br/><br/>"+
+        f"/api/v1.0/start/<start>"+
+        f" (Note: Enter start date after'/' in YYYY-MM-DD format.) <br/> <br/>"+  #Thanks Gary!!
+        f"/api/v1.0/date_range/<start>/<end> "+
         f"   (Note: Enter date range format: start date/end date (i.e. YYYY-MM-DD/YYYY-MM-DD))<br/>"
     )
 
