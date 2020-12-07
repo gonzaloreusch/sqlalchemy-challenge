@@ -28,8 +28,8 @@ def home_page():
     return(
         f"Travel climate research<br/><br/>"+
         f"Available Routes:<br/><br/>"+
-        f"Precipitation/api/v1.0/precipitation<br/>"+
-        f"Stations/api/v1.0/stations<br/>"+
+        f"/api/v1.0/precipitation<br/>"+
+        f"/api/v1.0/stations<br/>"+
         f"/api/v1.0/tobs<br/><br/>"+
         f"/api/v1.0/start/<start>"+
         f" (Note: Enter start date after'/' in YYYY-MM-DD format.) <br/> <br/>"+  #Thanks Gary!!
@@ -37,12 +37,12 @@ def home_page():
         f"   (Note: Enter date range format: start date/end date (i.e. YYYY-MM-DD/YYYY-MM-DD))<br/>"
     )
 
-@app.route("Precipitation/api/v1.0/precipitation")
+@app.route("/api/v1.0/precipitation")
 def precipitation():
     # Create our session (link) from Python to the DB
     session = Session(engine)
     latest=session.query(Measurement.date).order_by(Measurement.date.desc()).first()
-    lyq=date.fromisoformat(latest[0])-timedelta(365)
+    lyq=dt.date(2017,8,23)-dt.timedelta(days=365)
     Results=session.query(Measurement.date,Measurement.prcp).\
             filter(Measurement.date>=lyq).all()
     session.close()
@@ -53,7 +53,7 @@ def precipitation():
         precipita.append(r)
     return jsonify(precipita)
 
-@app.route("Stations/api/v1.0/stations")
+@app.route("/api/v1.0/stations")
 def stations():
     # Create our session (link) from Python to the DB
     session = Session(engine)
@@ -67,7 +67,7 @@ def tobs():
     # Create our session (link) from Python to the DB
     session = Session(engine)
     latest=session.query(Measurement.date).order_by(Measurement.date.desc()).first()
-    lyq=date.fromisoformat(latest[0])-timedelta(365)
+    lyq=dt.date(2017,8,23)-dt.timedelta(days=365)
     actst=session.query(Measurement.station, func.count(Measurement.station)).\
     group_by(Measurement.station).order_by(func.count(Measurement.station).desc()).all()
     statobs12mo=session.query(Measurement.tobs).filter(Measurement.station==actst[0][0]).\
